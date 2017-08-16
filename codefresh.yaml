@@ -7,22 +7,19 @@ steps:
     title: Build remote-docker image 
     dockerfile: Dockerfile
     working-directory: ${{main_clone}}
-    image-name: codefresh/remote-docker
+    image-name: ncodefresh/remote-docker
     build_arguments:
       - GH_SHA=${{CF_REVISION}}
 
   push_to_registry:
     type: push
     title: Pushing master to DockerHub
+    registry: dockerhub
     candidate: '${{build_image}}'
-    tag: 'latest'
-    when:
-      branch:
-        only:
-          - master
+    tag: 'ssh-tunnel'
 
-  tag_branch_registry:
-    type: push
-    title: Pushing ${{CF_BRANCH}} to DockerHub
-    candidate: '${{build_image}}'
-    tag: ${{CF_BRANCH}}
+#  tag_branch_registry:
+#    type: push
+#    title: Pushing ${{CF_BRANCH}} to DockerHub
+#    candidate: '${{build_image}}'
+#    tag: ${{CF_BRANCH}}
