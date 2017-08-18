@@ -45,5 +45,5 @@ control_path="$HOME/.rdocker-master-$(date +%s%N)"
 
 #ssh "${remote_host}" -p ${SSH_PORT} -i "$ssh_key_file" -nNf -o "StrictHostKeyChecking no" -o ControlMaster=yes -o ControlPath="${control_path}" -o ControlPersist=yes
 
-ssh -i "$ssh_key_file" -fNL 2375:localhost:2375 -p ${SSH_PORT} "${remote_host}"
+ssh -i "$ssh_key_file" -fNL 2375:localhost:2375 -p ${SSH_PORT} "${remote_host}" -o ControlMaster=yes -o ControlPersist=yes
 export DOCKER_HOST="tcp://localhost:2375"
