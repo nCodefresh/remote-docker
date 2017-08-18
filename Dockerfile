@@ -19,7 +19,7 @@ RUN curl -o "/tmp/docker-${DOCKER_VERSION}.tgz" -LS "https://get.docker.com/buil
     rm -rf /tmp/*
 
 # install rdocker script
-COPY rdocker.sh /usr/local/bin/rdocker
+COPY rdocker-ssh-tunnel.sh /usr/local/bin/rdocker
 RUN chmod +x /usr/local/bin/rdocker
 
 CMD ["rdocker"]
