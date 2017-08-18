@@ -45,5 +45,10 @@ control_path="$HOME/.rdocker-master-$(date +%s%N)"
 
 #ssh "${remote_host}" -p ${SSH_PORT} -i "$ssh_key_file" -nNf -o "StrictHostKeyChecking no" -o ControlMaster=yes -o ControlPath="${control_path}" -o ControlPersist=yes
 
-ssh -i "$ssh_key_file" -fNL 2375:localhost:2375 -p ${SSH_PORT} "${remote_host}" -o "StrictHostKeyChecking no"
-export DOCKER_HOST="tcp://localhost:2375"
+ssh -i "$ssh_key_file" -fNL ${local_port}:localhost:${local_port} -p ${SSH_PORT} "${remote_host}" -o "StrictHostKeyChecking no"
+export DOCKER_HOST="tcp://localhost:${local_port}"
+
+if [[ -n "$command" ]]; then
+    bash -c "$command"
+    exit_status=$?
+fi
