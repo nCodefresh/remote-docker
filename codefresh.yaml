@@ -16,7 +16,7 @@ steps:
     title: Pushing master to DockerHub
     registry: dockerhub
     candidate: '${{build_image}}'
-    tag: 'ssh-tunnel'
+    tag: '${{CF_BRANCH}}'
 
 #  tag_branch_registry:
 #    type: push
