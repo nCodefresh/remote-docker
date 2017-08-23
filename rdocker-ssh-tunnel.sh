@@ -43,7 +43,7 @@ else
 fi
 control_path="$HOME/.rdocker-master-$(date +%s%N)"
 
-ssh -i "$ssh_key_file" -p ${SSH_PORT} -fNL \*:localhost:${local_port}:/var/run/docker.sock "${remote_host}" -o "StrictHostKeyChecking no"
+ssh -i "$ssh_key_file" -p ${SSH_PORT} -fNL \*:${local_port}:localhost:${local_port}:/var/run/docker.sock "${remote_host}" -o "StrictHostKeyChecking no"
 export DOCKER_HOST="tcp://localhost:${local_port}"
 
 if [[ -n "$command" ]]; then
